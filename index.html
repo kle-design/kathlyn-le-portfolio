@@ -517,23 +517,23 @@ void main() {
     <div class="nav-links">
       <a href="#projects" class="active">Work</a>
       <a href="about.html">About</a>
-      <a href="https://www.dropbox.com/scl/fi/94kgf42tctglywzkl0roe/LeKathlyn_Resume.pdf?rlkey=wc9u3sqt5rsd1oabixwhsrzmk&st=f62uxhyj&dl=0" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.dropbox.com/scl/fi/xgbnkxe5gx43fwqydfz30/Kathlyn-Le-Resume.pdf?rlkey=9aznfdszl2gtrf9pr0js8mzw6&st=fai9iziw&dl=0" target="_blank" rel="noopener">Resume</a>
     </div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </nav>
   <div class="nav-mobile" id="nav-mobile">
     <a href="#projects" class="active">Work</a>
     <a href="about.html">About</a>
-    <a href="https://www.dropbox.com/scl/fi/94kgf42tctglywzkl0roe/LeKathlyn_Resume.pdf?rlkey=wc9u3sqt5rsd1oabixwhsrzmk&st=f62uxhyj&dl=0" target="_blank" rel="noopener">Resume</a>
+    <a href="https://www.dropbox.com/scl/fi/xgbnkxe5gx43fwqydfz30/Kathlyn-Le-Resume.pdf?rlkey=9aznfdszl2gtrf9pr0js8mzw6&st=fai9iziw&dl=0" target="_blank" rel="noopener">Resume</a>
   </div>
 
   <!-- HOME — fixed layer (no nav inside) -->
   <div id="home">
     <div class="hero">
-      <p class="hero-label">Product Designer &#x2726; Former UX/UI Design Intern @ FinThrive</p>
+      <p class="hero-label">Product Designer &amp; Researcher</p>
       <h1 class="hero-heading">hello, i'm kathlyn!</h1>
       <div class="facts-wrapper">
-        <span class="fact-single" id="fact-single">I'm a serial Winner</span>
+        <span class="fact-single" id="fact-single">I design experiences that make complex workflows feel effortless</span>
       </div>
     </div>
 
@@ -642,7 +642,7 @@ void main() {
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/kathlyn-le/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:kathlynle.design@gmail.com" target="_blank" rel="noopener">kathlynle.design@gmail.com</a>
-      <a href="https://www.dropbox.com/scl/fi/94kgf42tctglywzkl0roe/LeKathlyn_Resume.pdf?rlkey=wc9u3sqt5rsd1oabixwhsrzmk&st=f62uxhyj&dl=0" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.dropbox.com/scl/fi/xgbnkxe5gx43fwqydfz30/Kathlyn-Le-Resume.pdf?rlkey=9aznfdszl2gtrf9pr0js8mzw6&st=fai9iziw&dl=0" target="_blank" rel="noopener">Resume</a>
     </div>
     <p class="footer-copy">&copy; 2026 Kathlyn Le &#x2726; Made with 🍵</p>
   </footer>
@@ -655,7 +655,8 @@ void main() {
   <script>
     /* FACTS — JS-driven bounce, 1.5s per fact */
     const facts = [
-      "I'm a serial Winner",
+      "I design experiences that make complex workflows feel effortless",
+      "Every decision I make starts with the user",
       "I am very nosy about how people work",
       "I will try everything at least once",
       "I'm a certified scuba diver",
@@ -679,11 +680,22 @@ void main() {
         factIdx = (factIdx + 1) % facts.length;
         factEl.textContent = facts[factIdx];
         applyAnim(factEl, 'factBounceIn 0.38s cubic-bezier(0.34,1.56,0.64,1) forwards');
-        setTimeout(cycleFact, 1400);
+        setTimeout(cycleFact, 2600);
       }, 220);
     }
     applyAnim(factEl, 'factBounceIn 0.38s cubic-bezier(0.34,1.56,0.64,1) forwards');
-    setTimeout(cycleFact, 1780);
+    setTimeout(cycleFact, 2800);
+
+    /* HIDE HOME (hero + carousel) WHEN FOOTER IS IN VIEW */
+    const homeEl = document.getElementById('home');
+    homeEl.style.transition = 'opacity 0.35s ease';
+    const footerEl = document.querySelector('footer');
+    if (footerEl) {
+      new IntersectionObserver(([entry]) => {
+        homeEl.style.opacity = entry.isIntersecting ? '0' : '1';
+        homeEl.style.pointerEvents = entry.isIntersecting ? 'none' : '';
+      }, { threshold: 0 }).observe(footerEl);
+    }
 
     /* SCROLL ARROW — fades as user scrolls */
     const scrollArrow = document.getElementById('scroll-arrow');
